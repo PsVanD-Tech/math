@@ -76,7 +76,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Math Game Suite</h1>
+        <h1>Math Game Suite by PsVanD</h1>
         <div id="main-menu">
             <button class="menu-btn" onclick="showGame('calculator')">Kalkulator</button>
             <button class="menu-btn" onclick="showGame('kaprekar')">Kaprekar</button>
@@ -92,13 +92,6 @@
             <input type="number" id="calc-b">
             <label>Operator:</label>
             <select id="calc-op">
-            <!-- Pengumuman versi dan update -->
-            <div id="announcement" style="margin-top:32px; text-align:center; background:#e0e7ff; color:#334155; border-radius:8px; padding:16px; font-size:1em;">
-                <strong>Versi 1.0.0</strong><br>
-                Update terakhir: 18 September 2025<br>
-                Fitur: Kalkulator, Kaprekar, Batu Gunting Kertas, Tebak Angka, Russian Roulette.<br>
-                <em>Hubungi PsVanD untuk saran dan laporan bug.</em>
-            </div>
                 <option value="+">+</option>
                 <option value="-">-</option>
                 <option value="*">×</option>
@@ -144,6 +137,12 @@
             <div id="roulette-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+    </div>
+    <div id="announcement" style="margin-top:32px; text-align:center; background:#e0e7ff; color:#334155; border-radius:8px; padding:16px; font-size:1em;">
+                <strong>Versi 1.0.0</strong><br>
+                Update terakhir: 18 September 2025<br>
+                Fitur: Kalkulator, Kaprekar, Batu Gunting Kertas, Tebak Angka, Russian Roulette.<br>
+                <em>Hubungi PsVanD untuk saran dan laporan bug.</em>
     </div>
     <script>
         let guessNumber = Math.floor(Math.random() * 100) + 1;
