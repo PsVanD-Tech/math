@@ -205,9 +205,12 @@
                 }
                 if (reached) {
                     result = log.join('\n') + `\nBerhasil mencapai 6174 dalam ${steps} langkah!`;
+                } else if (num === 6174) {
+                    result = log.join('\n') + '\nAngka tidak valid.';
                 } else {
                     result = log.join('\n') + '\nGagal mencapai 6174 dalam 7 langkah atau angka tidak valid.';
                 }
+                
             }
             document.getElementById('kaprekar-result').innerText = result;
         }
