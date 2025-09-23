@@ -93,6 +93,7 @@
             <button class="menu-btn" onclick="showGame('rps')">Batu Gunting Kertas</button>
             <button class="menu-btn" onclick="showGame('guess')">Tebak Angka</button>
             <button class="menu-btn" onclick="showGame('roulette')">Russian Roulette</button>
+            <button class="menu-btn" onclick="showGame('quadratic')">Quadratic Solver</button>
         </div>
         <div id="calculator" class="game-section">
             <h2>Kalkulator</h2>
@@ -147,11 +148,23 @@
             <div id="roulette-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+        <div id="quadratic" class="game-section">
+            <h2>Quadratic Solver</h2>
+            <label>Koefisien a:</label>
+            <input type="number" id="quad-a">
+            <label>Koefisien b:</label>
+            <input type="number" id="quad-b">
+            <label>Koefisien c:</label>
+            <input type="number" id="quad-c">
+            <button class="menu-btn" onclick="runQuadraticSolver()">Hitung</button>
+            <div id="quad-result" class="result"></div>
+            <button class="back-btn" onclick="backToMenu()">Kembali</button>
+        </div>
     </div>
     <div id="announcement" class="announcement">
             <strong>Versi 1.0.1</strong><br>
-            Update terakhir: 18 September 2025<br>
-            Fitur: Update Kaprekar, Menambahkan rules.<br>
+            Update terakhir: 23 September 2025<br>
+            Fitur: Update Quadratic Solver<br>
             <em>Hubungi PsVanD untuk saran dan laporan bug.</em>
     </div>
     <script>
@@ -274,6 +287,32 @@
             }
             document.getElementById('roulette-result').innerText = result;
         }
+            function quadratic_solver(a, b, c) {
+                if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+                    return "Input koefisien tidak valid.";
+                }
+                let discriminant = b * b - 4 * a * c;
+                if (discriminant > 0) {
+                    let root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                    let root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                    return `Akar-akar: ${root1} dan ${root2}`;
+                } else if (discriminant === 0) {
+                    let root = -b / (2 * a);
+                    return `Akar tunggal: ${root}`;
+                } else {
+                    return "Tidak ada akar real.";
+                }
+            }
+
+            function runQuadraticSolver() {
+                let a = parseFloat(document.getElementById('quad-a').value);
+                let b = parseFloat(document.getElementById('quad-b').value);
+                let c = parseFloat(document.getElementById('quad-c').value);
+                let result = quadratic_solver(a, b, c);
+                document.getElementById('quad-result').innerText = result;
+            }
+
+        
     </script>
 </body>
 </html>
