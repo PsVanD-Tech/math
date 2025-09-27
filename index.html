@@ -5,6 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Game Suite by PsVanD</title>
     <style>
+        /* Style khusus untuk section volume */
+        #volume.game-section {
+            background: #f8fafc;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(44,112,238,0.06);
+            padding: 16px 10px;
+            margin-top: 12px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #volume h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        #volume label {
+            font-size: 0.98em;
+        }
+        #volume .menu-btn {
+            font-size: 1em;
+            padding: 10px;
+        }
+        #volume .result {
+            font-size: 0.98em;
+            padding: 8px;
+        }
+        #volume h2 {
+            color: #6366f1;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        #volume label {
+            color: #6366f1;
+            font-weight: 500;
+        }
+        #volume .menu-btn {
+            background: #6366f1;
+            color: #fff;
+        }
+        #volume .menu-btn:hover {
+            background: #4338ca;
+        }
+        #volume .result {
+            background: #e0e7ff;
+            color: #334155;
+        }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(120deg, #2c70ee 0%, #2c70ee 100%);
@@ -65,8 +111,10 @@
             margin: 8px 0;
             border-radius: 6px;
             border: 1px solid #cbd5e1;
-            width: 100%;
+            width: 96%;
             font-size: 1em;
+            box-sizing: border-box;
+            display: block;
         }
         label {
             font-weight: 500;
@@ -94,7 +142,11 @@
             <button class="menu-btn" onclick="showGame('guess')">Tebak Angka</button>
             <button class="menu-btn" onclick="showGame('roulette')">Russian Roulette</button>
             <button class="menu-btn" onclick="showGame('quadratic')">Quadratic Solver</button>
+            <button class="menu-btn" onclick="showGame('maxmin')">Nilai Max/Min Fungsi Kuadrat</button>
+            <button class="menu-btn" onclick="showGame('volume')">Volume Bangun Ruang</button>
         </div>
+
+        <!--/* Calculator Section */-->
         <div id="calculator" class="game-section">
             <h2>Kalkulator</h2>
             <label>Angka pertama:</label>
@@ -112,6 +164,8 @@
             <div id="calc-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+
+        <!--/* Kaprekar Section */-->
         <div id="kaprekar" class="game-section">
             <h2>Kaprekar</h2>
             <label>Masukkan angka 4 digit(Kecuali 6174):</label>
@@ -120,6 +174,8 @@
             <div id="kaprekar-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+
+        <!--/* Rock Paper Scissors Section */-->
         <div id="rps" class="game-section">
             <h2>Batu Gunting Kertas</h2>
             <label>Pilihan kamu:</label>
@@ -132,6 +188,8 @@
             <div id="rps-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+
+        <!--/* Guess the Number Section */-->
         <div id="guess" class="game-section">
             <h2>Tebak Angka</h2>
             <label>Tebak angka antara 1 dan 100:</label>
@@ -140,6 +198,8 @@
             <div id="guess-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+
+        <!--/* Russian Roulette Section */-->
         <div id="roulette" class="game-section">
             <h2>Russian Roulette</h2>
             <label>Pilih chamber (1-6):</label>
@@ -148,6 +208,8 @@
             <div id="roulette-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+
+        <!--/* Quadratic Solver Section */-->
         <div id="quadratic" class="game-section">
             <h2>Quadratic Solver</h2>
             <label>Koefisien a:</label>
@@ -160,14 +222,126 @@
             <div id="quad-result" class="result"></div>
             <button class="back-btn" onclick="backToMenu()">Kembali</button>
         </div>
+
+    <!--/* Max/Min Fungsi Kuadrat Section */-->
+        <div id="maxmin" class="game-section" style="display:none;">
+            <h2>Nilai Maksimum/Minimum Fungsi Kuadrat</h2>
+            <label>Koefisien a:</label>
+            <input type="number" id="maxmin-a">
+            <label>Koefisien b:</label>
+            <input type="number" id="maxmin-b">
+            <label>Koefisien c:</label>
+            <input type="number" id="maxmin-c">
+            <button class="menu-btn" onclick="runMaxMinFungsi()">Hitung</button>
+            <div id="maxmin-result" class="result"></div>
+            <button class="back-btn" onclick="backToMenu()">Kembali</button>
+            </div>
+    </div>
+
+    <!--/* Volume Bangun Ruang Section */-->
+    <div id="volume" class="game-section">
+            <h2>Volume Bangun Ruang</h2>
+            <label>Pilih bentuk:</label>
+            <select id="volume-shape" onchange="showVolumeInputs()">
+                <option value="kubus">Kubus</option>
+                <option value="balok">Balok</option>
+                <option value="bola">Bola</option>
+                <option value="prisma-segitiga">Prisma Segitiga</option>
+                <option value="prisma-persegi">Prisma Persegi</option>
+                <option value="limas-segitiga">Limas Segitiga</option>
+                <option value="limas-persegi">Limas Persegi</option>
+            </select>
+            <div id="volume-inputs"></div>
+            <button class="menu-btn" onclick="runVolume()">Hitung Volume</button>
+            <div id="volume-result" class="result"></div>
+            <button class="back-btn" onclick="backToMenu()">Kembali</button>
     </div>
     <div id="announcement" class="announcement">
-            <strong>Versi 1.0.2</strong><br>
-            Update terakhir: 23 September 2025<br>
-            Fitur: Update Quadratic Solver<br>
+            <strong>Versi 1.0.1</strong><br>
+            Update terakhir: 27 September 2025<br>
+            Fitur: Update Volume + Nilai Max Min Fungsi Kuadrat<br>
             <em>Hubungi PsVanD untuk saran dan laporan bug.</em>
     </div>
     <script>
+        function showVolumeInputs() {
+            const shape = document.getElementById('volume-shape').value;
+            let html = '';
+            if (shape === 'kubus') {
+                html = '<label>Panjang sisi:</label><input type="number" id="vol-sisi">';
+            } else if (shape === 'balok') {
+                html = '<label>Panjang:</label><input type="number" id="vol-panjang">';
+                html += '<label>Lebar:</label><input type="number" id="vol-lebar">';
+                html += '<label>Tinggi:</label><input type="number" id="vol-tinggi">';
+            } else if (shape === 'bola') {
+                html = '<label>Jari-jari:</label><input type="number" id="vol-radius">';
+            } else if (shape === 'prisma-segitiga') {
+                html = '<label>Sisi alas segitiga:</label><input type="number" id="vol-a">';
+                html += '<label>Tinggi prisma:</label><input type="number" id="vol-tinggi">';
+            } else if (shape === 'prisma-persegi') {
+                html = '<label>Sisi persegi:</label><input type="number" id="vol-sisi">';
+                html += '<label>Tinggi prisma:</label><input type="number" id="vol-tinggi">';
+            } else if (shape === 'limas-segitiga') {
+                html = '<label>Sisi alas segitiga:</label><input type="number" id="vol-a">';
+                html += '<label>Tinggi limas:</label><input type="number" id="vol-tinggi">';
+            } else if (shape === 'limas-persegi') {
+                html = '<label>Sisi persegi:</label><input type="number" id="vol-sisi">';
+                html += '<label>Tinggi limas:</label><input type="number" id="vol-tinggi">';
+            }
+            document.getElementById('volume-inputs').innerHTML = html;
+        }
+
+        function runVolume() {
+            const shape = document.getElementById('volume-shape').value;
+            let result = '';
+            if (shape === 'kubus') {
+                let sisi = parseFloat(document.getElementById('vol-sisi').value);
+                if (isNaN(sisi) || sisi <= 0) result = 'Panjang sisi tidak valid.';
+                else result = `Volume kubus: ${sisi * sisi * sisi}`;
+            } else if (shape === 'balok') {
+                let panjang = parseFloat(document.getElementById('vol-panjang').value);
+                let lebar = parseFloat(document.getElementById('vol-lebar').value);
+                let tinggi = parseFloat(document.getElementById('vol-tinggi').value);
+                if ([panjang, lebar, tinggi].some(x => isNaN(x) || x <= 0)) result = 'Dimensi balok tidak valid.';
+                else result = `Volume balok: ${panjang * lebar * tinggi}`;
+            } else if (shape === 'bola') {
+                let radius = parseFloat(document.getElementById('vol-radius').value);
+                if (isNaN(radius) || radius <= 0) result = 'Jari-jari tidak valid.';
+                else result = `Volume bola: ${(4/3) * Math.PI * Math.pow(radius, 3)}`;
+            } else if (shape === 'prisma-segitiga') {
+                let a = parseFloat(document.getElementById('vol-a').value);
+                let tinggi = parseFloat(document.getElementById('vol-tinggi').value);
+                if (isNaN(a) || isNaN(tinggi) || a <= 0 || tinggi <= 0) result = 'Dimensi tidak valid.';
+                else {
+                    let areaAlas = (Math.sqrt(3)/4) * a * a;
+                    result = `Volume prisma segitiga: ${areaAlas * tinggi}`;
+                }
+            } else if (shape === 'prisma-persegi') {
+                let sisi = parseFloat(document.getElementById('vol-sisi').value);
+                let tinggi = parseFloat(document.getElementById('vol-tinggi').value);
+                if (isNaN(sisi) || isNaN(tinggi) || sisi <= 0 || tinggi <= 0) result = 'Dimensi tidak valid.';
+                else {
+                    let areaAlas = sisi * sisi;
+                    result = `Volume prisma persegi: ${areaAlas * tinggi}`;
+                }
+            } else if (shape === 'limas-segitiga') {
+                let a = parseFloat(document.getElementById('vol-a').value);
+                let tinggi = parseFloat(document.getElementById('vol-tinggi').value);
+                if (isNaN(a) || isNaN(tinggi) || a <= 0 || tinggi <= 0) result = 'Dimensi tidak valid.';
+                else {
+                    let areaAlas = (Math.sqrt(3)/4) * a * a;
+                    result = `Volume limas segitiga: ${(1/3) * areaAlas * tinggi}`;
+                }
+            } else if (shape === 'limas-persegi') {
+                let sisi = parseFloat(document.getElementById('vol-sisi').value);
+                let tinggi = parseFloat(document.getElementById('vol-tinggi').value);
+                if (isNaN(sisi) || isNaN(tinggi) || sisi <= 0 || tinggi <= 0) result = 'Dimensi tidak valid.';
+                else {
+                    let areaAlas = sisi * sisi;
+                    result = `Volume limas persegi: ${(1/3) * areaAlas * tinggi}`;
+                }
+            }
+            document.getElementById('volume-result').innerText = result;
+        }
         let guessNumber = Math.floor(Math.random() * 100) + 1;
         let guessAttempts = 0;
         function showGame(game) {
@@ -312,7 +486,28 @@
                 document.getElementById('quad-result').innerText = result;
             }
 
-        
+            function runMaxMinFungsi() {
+            let a = parseFloat(document.getElementById('maxmin-a').value);
+            let b = parseFloat(document.getElementById('maxmin-b').value);
+            let c = parseFloat(document.getElementById('maxmin-c').value);
+            let result = '';
+            if (isNaN(a) || a === 0) {
+                result = 'Koefisien a tidak valid atau nol.';
+            } else if (isNaN(b)) {
+                result = 'Koefisien b tidak valid.';
+            } else if (isNaN(c)) {
+                result = 'Koefisien c tidak valid.';
+            } else {
+                let vertexX = -b / (2 * a);
+                let vertexY = a * vertexX * vertexX + b * vertexX + c;
+                if (a > 0) {
+                    result = `Fungsi memiliki nilai minimum di (x=${vertexX}, y=${vertexY})`;
+                } else {
+                    result = `Fungsi memiliki nilai maksimum di (x=${vertexX}, y=${vertexY})`;
+                }
+            }
+            document.getElementById('maxmin-result').innerText = result;
+            }
     </script>
 </body>
 </html>
